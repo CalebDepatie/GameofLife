@@ -1,24 +1,27 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+
+import { RuleSelector } from './RuleSelector';
+import { GameBoard } from './GameBoard';
 
 function App() {
+  const defaultRules = {size:20, minLife:2, maxLife:3, live:3};
+  const [ rules, setRules ] = useState<{[key:string]: any}>(defaultRules);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+      <header style={{margin:"1rem"}}>
+        Conways Game of Life
       </header>
+
+        {/* rules bar */}
+      <div style={{float:"left", width:"20vw"}}>
+        <RuleSelector rules={rules} setRules={setRules} />
+      </div>
+
+        {/* game viewer and logic handler */}
+      <div style={{float:"right", width:"75vw"}}>
+        <GameBoard rules={rules} />
+      </div>
     </div>
   );
 }
