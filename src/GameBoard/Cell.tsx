@@ -1,10 +1,11 @@
 import React from 'react';
 import './Cell.css';
 
-function Cell(props:{live:boolean}) {
+function Cell(props:{live:boolean, setLive:((val:boolean)=>void)}) {
 
   return (
-    <div className={'cell ' + props.live ? 'live' : 'dead'} />
+    <div id={props.live ? 'live' : 'dead'} className={'cell'}
+      onClick={(e:any) => props.setLive(!props.live)}/>
   )
 };
 

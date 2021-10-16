@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       <header style={{margin:"1rem"}}>
-        Conways Game of Life
+        Conway's Game of Life
       </header>
 
         {/* rules bar */}
