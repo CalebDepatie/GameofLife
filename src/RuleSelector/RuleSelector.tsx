@@ -30,7 +30,7 @@ function RuleSelector(props:{rules:{[key:string]: any}, setRules:Dispatch<SetSta
           Any dead cell with&nbsp;
 
           <input type='text' value={props.rules['live']} style={{width:"1.5rem"}} disabled={true}
-            onChange={(e) => props.setRules({...props.rules, minLife:e.target.value})} />
+            onChange={(e) => props.setRules({...props.rules, live:e.target.value})} />
 
            &nbsp;live neighbours becomes a live cell.
         </div>
