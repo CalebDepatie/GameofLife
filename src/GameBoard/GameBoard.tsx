@@ -66,7 +66,7 @@ function GameBoard(props:{rules:{[key:string]: any}}) {
     if (playing) {
       // ticks every second
       timer = setInterval(() => {
-        setGameState(GameLogic(props.rules, gameState));
+        setGameState(currentBoard => GameLogic(props.rules, currentBoard));
       }, 1000);
 
     } else {
