@@ -54,8 +54,7 @@ function GameLogic(rules:{[key:string]: any}, currentBoard:boolean[]): boolean[]
 function GameBoard(props:{rules:{[key:string]: any}}) {
   const [ gameState, setGameState ] = useState<boolean[]>([]);
   const [ playing, setPlaying ] = useState(false);
-
-  let timer:any = null;
+  const [ timer, setTimer ] = useState<any>(null);
 
   useEffect(() => {
     setGameState(Array(props.rules['size'] * props.rules['size']).fill(false));
@@ -65,9 +64,9 @@ function GameBoard(props:{rules:{[key:string]: any}}) {
   useEffect(() => {
     if (playing) {
       // ticks every second
-      timer = setInterval(() => {
+      setTimer(setInterval(() => {
         setGameState(currentBoard => GameLogic(props.rules, currentBoard));
-      }, 1000);
+      }, 1000));
 
     } else {
       clearInterval(timer);
@@ -86,7 +85,7 @@ function GameBoard(props:{rules:{[key:string]: any}}) {
   let content: any[] = [];
 
   for (let i = 0; i < props.rules['size']; i++) {
-    let row: Array<any> = []
+    let row: any[] = [];
     for (let j = 0; j < props.rules['size']; j++) {
       const idx:number = j + props.rules['size']*i;
       row.push(<Cell key={"cell-" + i + "-" + j} live={gameState[idx]} setLive={setCellState(idx)} readOnly={playing}/>);
@@ -97,7 +96,7 @@ function GameBoard(props:{rules:{[key:string]: any}}) {
   return (
     <>
       <div style={{marginBottom:"1rem"}}>
-        <button onClick={(e:any) => setPlaying(!playing)}>{playing ? 'Pause' : 'Play' }</button>
+        <button onClick={(e:any) => setPlaying(curPlay => !curPlay)}>{playing ? 'Pause' : 'Play' }</button>
         <button onClick={(e:any) => setGameState(Array(props.rules['size'] * props.rules['size']).fill(false))}>Clear Board</button>
       </div>
       {content}
